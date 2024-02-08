@@ -11,7 +11,6 @@ export const registration = async (userEmail, userPassword) => {
         userPassword: userPassword
     })
     localStorage.setItem('token', data.token)
-    console.log(data)
     return jwtDecode(data.token)
 }
 

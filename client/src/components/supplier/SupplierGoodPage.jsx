@@ -10,7 +10,8 @@ import {
     Col,
     Image,
     Typography,
-    Popconfirm, notification
+    Popconfirm,
+    notification
 } from "antd";
 import {SearchOutlined} from '@ant-design/icons';
 import Highlighter from 'react-highlight-words'
@@ -134,14 +135,13 @@ const SupplierGoodPage = () => {
             ),
     });
 
-
     const columns = [
         {
             title: '№ товара',
             dataIndex: 'id',
             key: 'id',
-            defaultSortOrder: 'descend',
-            sorter: (a, b) => b.id - a.id
+            defaultSortOrder: 'ascend',
+            sorter: (a, b) => a.id - b.id
         },
         {
             title: 'Название товара',
@@ -163,6 +163,8 @@ const SupplierGoodPage = () => {
             title: 'Количество товара',
             dataIndex: 'goodAmount',
             key: 'goodAmount',
+            defaultSortOrder: 'descend',
+            sorter: (a, b) => b.id - a.id,
             render: (text) => {
                 if (+text >= 10)
                     return <span style={{color: "green"}}>В количестве {text}</span>
@@ -173,9 +175,11 @@ const SupplierGoodPage = () => {
             }
         },
         {
-            title: 'Бренд товара',
+            title: 'Цена товара',
             dataIndex: 'goodPrice',
             key: 'goodPrice',
+            defaultSortOrder: 'descend',
+            sorter: (a, b) => b.id - a.id,
             render: (text) => {
                 return <span>{text} ₽</span>
             }

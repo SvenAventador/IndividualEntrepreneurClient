@@ -308,7 +308,10 @@ const AddAndEditGoodModal = (props) => {
                    maskClosable={false}
                    footer={[
                        <Button type={"primary"}
-                               key='cancel'>
+                               key='cancel'
+                               onClick={() => {
+                                   onCancel()
+                               }}>
                            Отмена
                        </Button>,
                        <Button style={{
@@ -352,14 +355,22 @@ const AddAndEditGoodModal = (props) => {
                 />
 
                 <Input value={goodAmount}
-                       onChange={(e) => setGoodAmount(e.target.value)}
+                       onChange={(e) => {
+                           const onlyNumbers = e.target.value.replace(/[^0-9]/g, ''); // Удаляем все символы, кроме цифр
+                           setGoodAmount(onlyNumbers);
+                       }}
+                       maxLength={7}
                        style={{marginBottom: '1rem'}}
                        placeholder="Введите количество товара..."
                        prefix='шт'
                 />
 
                 <Input value={goodPrice}
-                       onChange={(e) => setGoodPrice(e.target.value)}
+                       onChange={(e) => {
+                           const onlyNumbers = e.target.value.replace(/[^0-9]/g, ''); // Удаляем все символы, кроме цифр
+                           setGoodPrice(onlyNumbers);
+                       }}
+                       maxLength={7}
                        style={{marginBottom: '1rem'}}
                        placeholder="Введите цену товара..."
                        prefix='₽'
