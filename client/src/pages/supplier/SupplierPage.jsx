@@ -12,21 +12,21 @@ import {
     MenuUnfoldOutlined,
     MenuFoldOutlined
 } from '@ant-design/icons';
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import SupplierGoodPage from "../../components/supplier/SupplierGoodPage";
 import SupplierInvoicePage from "../../components/supplier/SupplierInvoicePage";
-import { useUser } from "../../store/UserStore";
+import {useUser} from "../../store/UserStore";
 import Swal from "sweetalert2";
-import { MAIN_PATH } from "../../utils/consts";
+import {LOGIN_PATH} from "../../utils/consts";
 
-const { Sider } = Layout;
+const {Sider} = Layout;
 
 const SupplierPage = () => {
     const history = useNavigate();
     const [collapsed, setCollapsed] = React.useState(false);
     const [theme, setTheme] = React.useState('light');
     const [selectedMenuItem, setSelectedMenuItem] = React.useState('goods');
-    const { logoutUser } = useUser();
+    const {logoutUser} = useUser();
 
     const handleLogout = () => {
         logoutUser().then(() => {
@@ -35,7 +35,7 @@ const SupplierPage = () => {
                 text: 'До скорых встреч, друг! Ждем тебя снова! ❤️',
                 icon: "success"
             }).then(() => {
-                history(MAIN_PATH);
+                history(LOGIN_PATH);
             });
         });
     };
@@ -50,9 +50,9 @@ const SupplierPage = () => {
     }
 
     const items = [
-        getItem('Товары', '1', <AppleOutlined />, () => setSelectedMenuItem('goods')),
-        getItem('Накладные', '2', <UnorderedListOutlined />, () => setSelectedMenuItem('invoice')),
-        getItem('Выйти из аккаунта', '3', <LogoutOutlined />, handleLogout)
+        getItem('Товары', '1', <AppleOutlined/>, () => setSelectedMenuItem('goods')),
+        getItem('Накладные', '2', <UnorderedListOutlined/>, () => setSelectedMenuItem('invoice')),
+        getItem('Выйти из аккаунта', '3', <LogoutOutlined/>, handleLogout)
     ];
 
     const toggleCollapsed = () => {

@@ -9,14 +9,17 @@ import {
     AppleOutlined,
     LogoutOutlined,
     MenuUnfoldOutlined,
-    MenuFoldOutlined
+    MenuFoldOutlined,
+    ShoppingCartOutlined
 } from '@ant-design/icons';
 import {useNavigate} from "react-router-dom";
 import {useUser} from "../../store/UserStore";
 import Swal from "sweetalert2";
-import {MAIN_PATH} from "../../utils/consts";
+import {LOGIN_PATH} from "../../utils/consts";
 import AdminSupplierPage from "../../components/admin/AdminSupplierPage";
 import AdminOurGoodsPage from "../../components/admin/AdminOurGoodsPage";
+import AdminCompanyCart from "../../components/admin/AdminCompanyCart";
+
 
 const {Sider} = Layout;
 
@@ -33,7 +36,7 @@ const AdminPage = () => {
                 text: 'До скорых встреч, друг! Ждем тебя снова! ❤️',
                 icon: "success"
             }).then(() => {
-                history(MAIN_PATH);
+                history(LOGIN_PATH);
             });
         });
     };
@@ -50,7 +53,8 @@ const AdminPage = () => {
     const items = [
         getItem('Поставщики', '1', <UserOutlined/>, () => setSelectedMenuItem('suppliers')),
         getItem('Наши товары', '2', <AppleOutlined/>, () => setSelectedMenuItem('goods_company')),
-        getItem('Выйти из аккаунта', '3', <LogoutOutlined/>, handleLogout)
+        getItem('Корзина', '3', <ShoppingCartOutlined/>, () => setSelectedMenuItem('company_cart')),
+        getItem('Выйти из аккаунта', '4', <LogoutOutlined/>, handleLogout)
     ];
 
     const toggleCollapsed = () => {
@@ -87,6 +91,7 @@ const AdminPage = () => {
                 <Layout.Content>
                     {selectedMenuItem === 'suppliers' && <AdminSupplierPage/>}
                     {selectedMenuItem === 'goods_company' && <AdminOurGoodsPage/>}
+                    {selectedMenuItem === 'company_cart' && <AdminCompanyCart/>}
                 </Layout.Content>
             </Layout>
         </Layout>

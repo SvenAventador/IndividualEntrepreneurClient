@@ -1,9 +1,12 @@
 import {create} from 'zustand';
 import {
     addGood,
+    adoptInvoice,
+    changeStatus,
     deleteAllGood,
     deleteOneGood,
     getAllGoods,
+    getAllInvoice,
     getOneGood,
     updateGood
 } from "../http/supplierApi";
@@ -11,6 +14,7 @@ import {
 export const useSupplier = create((set) => ({
     allGoods: {},
     oneGood: [],
+    invoice: [],
     error: null,
     message: null,
 
@@ -95,6 +99,54 @@ export const useSupplier = create((set) => ({
     deleteOneGood: async (id) => {
         try {
             await deleteOneGood(id)
+        } catch (error) {
+            set({
+                error,
+                message: error.response.data.message
+            })
+        }
+    },
+
+    getAllInvoices: async (supplierId) => {
+        try {
+            const data = await getAllInvoice(supplierId)
+            set({
+                invoice: data
+            })
+
+            return data
+        } catch (error) {
+            set({
+                error,
+                message: error.response.data.message
+            })
+        }
+    },
+
+    adoptInvoice: async (id) => {
+        try {
+            const data = await adoptInvoice(id)
+            set({
+                invoice: data
+            })
+
+            return data
+        } catch (error) {
+            set({
+                error,
+                message: error.response.data.message
+            })
+        }
+    },
+
+    changeStatus: async (invoiceId, statusId) => {
+        try {
+            const data = await changeStatus(invoiceId, statusId)
+            set({
+                invoice: data
+            })
+
+            return data
         } catch (error) {
             set({
                 error,

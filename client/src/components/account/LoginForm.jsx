@@ -9,8 +9,12 @@ import {
     LockOutlined,
     MailOutlined,
 } from "@ant-design/icons";
-import {NavLink, useNavigate} from "react-router-dom";
-import {ADMIN_PATH, MAIN_PATH, MANAGER_PATH, REGISTRATION_PATH, SUPPLIER_PATH} from "../../utils/consts";
+import {useNavigate} from "react-router-dom";
+import {
+    ADMIN_PATH,
+    MANAGER_PATH,
+    SUPPLIER_PATH
+} from "../../utils/consts";
 import Title from "antd/es/typography/Title";
 import {useUser} from "../../store/UserStore";
 import Swal from "sweetalert2";
@@ -92,9 +96,6 @@ const LoginForm = () => {
                             onClick={async () => {
                                 loginUser(userEmail, password).then((data) => {
                                     switch (data.userRole) {
-                                        case "USER":
-                                            history(MAIN_PATH)
-                                            break
                                         case "ADMIN":
                                             history(ADMIN_PATH)
                                             break
@@ -125,12 +126,6 @@ const LoginForm = () => {
                             }}>
                         Войти в аккаунт
                     </Button>
-                </Form.Item>
-
-                <Form.Item style={{
-                    textAlign: 'center'
-                }}>
-                    Нет аккаунта? <NavLink to={REGISTRATION_PATH}>Зарегистрируйтесь!</NavLink>
                 </Form.Item>
 
             </Form>

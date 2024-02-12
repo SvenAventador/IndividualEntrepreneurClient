@@ -1,15 +1,27 @@
 import React from 'react';
-import {Button, notification, Popconfirm, Space, Table} from "antd";
+import {
+    Button,
+    notification,
+    Popconfirm,
+    Space,
+    Table
+} from "antd";
 import {useAdmin} from "../../store/AdminStore";
 import {SearchOutlined} from "@ant-design/icons";
 import AddSupplier from "./modal/AddSupplier";
+import {useUser} from "../../store/UserStore";
 
 const AdminSupplierPage = () => {
     let {
         getAllSuppliers,
         deleteOneSupplier,
-        deleteAllSupplier
+        deleteAllSupplier,
+        addToCart
     } = useAdmin()
+    let {
+        user
+    } = useUser()
+
     const [allSuppliers, setAllSuppliers] = React.useState([])
     React.useEffect(() => {
         getAllSuppliers().then(({suppliers}) => {
@@ -28,6 +40,28 @@ const AdminSupplierPage = () => {
     }
     const handleCancel = () => {
         setOpen(false)
+    }
+
+    const addCart = (record) => {
+        addToCart(record.supplierId, user.userId, record.id).then(() => {
+            return api.success({
+                message: 'Внимание!',
+                description: `Товар успешно добавлен в корзину!`,
+                className: 'custom-class',
+                style: {
+                    width: 600
+                }
+            })
+        }).catch((error) => {
+            return api.error({
+                message: 'Внимание!',
+                description: error.response.data.message,
+                className: 'custom-class',
+                style: {
+                    width: 600
+                }
+            })
+        })
     }
 
     const expandedRowRender = (record) => {
@@ -91,6 +125,9 @@ const AdminSupplierPage = () => {
                             <Button style={{
                                 background: 'green',
                                 color: 'white'
+                            }}
+                            onClick={() => {
+                                addCart(record)
                             }}>Купить товар</Button>
                         </Space>
                     )
@@ -99,7 +136,9 @@ const AdminSupplierPage = () => {
         ]
 
         return <Table columns={column}
-                      dataSource={record.supplier_goods.map((good) => ({...good, key: good.id}))}
+                      dataSource={record.supplier_goods
+                          .filter((good) => good.goodAmount)
+                          .map((good) => ({...good, key: good.id}))}
                       pagination={false}
         />;
 
@@ -144,11 +183,13 @@ const AdminSupplierPage = () => {
                         flexFlow: "column"
                     }}>
                         <Popconfirm
-                            title="Вы уверены, что хотите удалить этот товар?"
+                            title="Вы уверены, что хотите удалить этого поставщика?"
                             onConfirm={() => confirmOneSupplier(record.id)}
                             okText="Да"
                             cancelText="Отмена">
-                            <Button danger>Удалить товар</Button>
+                            <Button danger>
+                                Удалить поставщика
+                            </Button>
                         </Popconfirm>
                     </Space>
                 )

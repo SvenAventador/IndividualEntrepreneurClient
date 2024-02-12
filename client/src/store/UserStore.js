@@ -3,7 +3,6 @@ import {
     check,
     login,
     logout,
-    registration
 } from '../http/userApi';
 
 export const useUser = create((set) => ({
@@ -11,28 +10,6 @@ export const useUser = create((set) => ({
     isAuth: false,
     error: null,
     message: null,
-
-    registrationUser: async (emailUser, passwordUser) => {
-        try {
-            const data = await registration(emailUser, passwordUser);
-            set({
-                user: data,
-                isAuth: true,
-                error: null,
-                message: null
-            });
-
-            return data;
-        } catch (error) {
-            set({
-                user: null,
-                isAuth: false,
-                error,
-                message: error.response.data.message
-            });
-            throw error;
-        }
-    },
 
     loginUser: async (emailUser, passwordUser) => {
         try {

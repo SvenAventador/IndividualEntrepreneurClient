@@ -16,7 +16,7 @@ import Highlighter from "react-highlight-words";
 const {Text} = Typography
 
 
-const AdminOurGoodsPage = () => {
+const ManagerGoodPage = () => {
     let {
         getAllGoods
     } = useAdmin()
@@ -234,4 +234,4 @@ const AdminOurGoodsPage = () => {
     );
 };
 
-export default AdminOurGoodsPage;
+export default ManagerGoodPage;

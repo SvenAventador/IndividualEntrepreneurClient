@@ -24,6 +24,14 @@ const AddSupplier = (props) => {
         return false;
     };
 
+    const clearData = () => {
+        setUserEmail('')
+        setUserSurname('')
+        setUserName('')
+        setUserPatronymic('')
+        setFileList([])
+    }
+
     let {
         addSupplier
     } = useAdmin()
@@ -109,6 +117,7 @@ const AddSupplier = (props) => {
                 text: 'Поставщик успешно добавлен!'
             }).then(() => {
                 onOk()
+                clearData()
             })
         }).catch((error) => {
             return api.error({

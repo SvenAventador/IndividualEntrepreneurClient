@@ -189,10 +189,11 @@ const SupplierGoodPage = () => {
             key: 'actions',
             render: (record) => {
                 return (
-                    <Space size="large" style={{
-                        display: "flex",
-                        flexFlow: "column"
-                    }}>
+                    <Space size="large"
+                           style={{
+                               display: "flex",
+                               flexFlow: "column"
+                           }}>
                         <Button type={"primary"}
                                 onClick={() => {
                                     showModal(record.id)
@@ -270,7 +271,7 @@ const SupplierGoodPage = () => {
 
     const customEmptyText = (
         <div>
-            <SearchOutlined style={{ fontSize: 24, color: '#999' }} />
+            <SearchOutlined style={{fontSize: 24, color: '#999'}}/>
             <p>Пустоватенько...</p>
         </div>
     );

@@ -5,15 +5,6 @@ const {
     $authHost
 } = require('./index')
 
-export const registration = async (userEmail, userPassword) => {
-    const {data} = await $host.post('api/user/registration', {
-        userEmail: userEmail,
-        userPassword: userPassword
-    })
-    localStorage.setItem('token', data.token)
-    return jwtDecode(data.token)
-}
-
 export const login = async (userEmail, userPassword) => {
     const {data} = await $host.post('api/user/login', {
         userEmail,
@@ -34,4 +25,3 @@ export const logout = async () => {
     localStorage.removeItem('token')
     return data
 }
-

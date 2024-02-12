@@ -29,3 +29,18 @@ export const deleteOneGood = async (id) => {
     const {data} = await $authHost.delete(`/api/supplier/deleteOneGood?id=${id}`)
     return data
 }
+
+export const getAllInvoice = async (supplierId) => {
+    const {data} = await $authHost.get(`/api/supplier/allInvoice?supplierId=${supplierId}`)
+    return data
+}
+
+export const adoptInvoice = async (id) => {
+    const {data} = $authHost.post(`/api/supplier/adoptInvoice?id=${id}`)
+    return data
+}
+
+export const changeStatus = async (invoiceId, statusId) => {
+    const {data} = $authHost.post(`/api/supplier/changeStatus?invoiceId=${invoiceId}&deliveryStatusId=${statusId}`)
+    return data
+}
