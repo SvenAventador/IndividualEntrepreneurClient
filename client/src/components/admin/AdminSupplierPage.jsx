@@ -8,7 +8,7 @@ import {
 } from "antd";
 import {useAdmin} from "../../store/AdminStore";
 import {SearchOutlined} from "@ant-design/icons";
-import AddSupplier from "./modal/AddSupplier";
+import AddSupplierModal from "./modal/AddSupplierModal";
 import {useUser} from "../../store/UserStore";
 
 const AdminSupplierPage = () => {
@@ -279,9 +279,9 @@ const AdminSupplierPage = () => {
                    }}
             />
 
-            <AddSupplier open={open}
-                         onOk={handleOk}
-                         onCancel={handleCancel}/>
+            <AddSupplierModal open={open}
+                              onOk={handleOk}
+                              onCancel={handleCancel}/>
         </>
     );
 };

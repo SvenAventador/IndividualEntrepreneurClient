@@ -39,3 +39,8 @@ export const getOurGoods = async () => {
     const {data} = await $authHost.get('/api/admin/getAllGoods')
     return data
 }
+
+export const updateCount = async (id, newCount) => {
+    const {data} = await $authHost.put(`/api/admin/updateCount?id=${id}&newCount=${newCount}`)
+    return data
+}

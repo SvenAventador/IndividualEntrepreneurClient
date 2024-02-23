@@ -4,7 +4,7 @@ import {UploadOutlined} from "@ant-design/icons";
 import {useAdmin} from "../../../store/AdminStore";
 import Swal from "sweetalert2";
 
-const AddSupplier = (props) => {
+const AddSupplierModal = (props) => {
     const {
         open,
         onOk,
@@ -192,4 +192,4 @@ const AddSupplier = (props) => {
     );
 };
 
-export default AddSupplier;
+export default AddSupplierModal;

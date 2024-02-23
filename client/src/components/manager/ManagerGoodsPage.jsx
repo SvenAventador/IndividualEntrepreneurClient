@@ -12,6 +12,7 @@ import {
 import {useAdmin} from "../../store/AdminStore";
 import {SearchOutlined} from "@ant-design/icons";
 import Highlighter from "react-highlight-words";
+import OurGoodModal from "../admin/modal/OurGoodModal";
 
 const {Text} = Typography
 
@@ -131,6 +132,25 @@ const ManagerGoodPage = () => {
         </div>
     );
 
+    const [open, setOpen] = React.useState(false)
+    const handleOk = () => {
+        getAllGoods().then(({allGoods}) => {
+            setGoods(allGoods)
+        })
+        setOpen(false)
+    }
+    const handleCancel = () => {
+        setOpen(false)
+    }
+
+    const [id, setId] = React.useState(0)
+    const [amount, setAmount] = React.useState(0)
+    const showModal = (id, amount) => {
+        setId(id)
+        setAmount(amount)
+        setOpen(true)
+    }
+
     const columns = [
         {
             title: '№ товара',
@@ -179,6 +199,24 @@ const ManagerGoodPage = () => {
             render: (text) => {
                 return <span>{text} ₽</span>
             }
+        },
+        {
+            title: 'Действия',
+            dataIndex: 'actions',
+            key: 'actions',
+            render: (record) => {
+                return (
+                    <Space size={"large"}>
+                        <Button style={{
+                            background: "green",
+                            color: 'white'
+                        }}
+                                onClick={() => {
+                                    showModal(record.id, record.goodAmount)
+                                }}>Изменить количество</Button>
+                    </Space>
+                )
+            }
         }
     ]
 
@@ -220,7 +258,14 @@ const ManagerGoodPage = () => {
                        }
                    }}
                    columns={columns}
-                   dataSource={goods.map((good) => ({...good, key: good.id}))}
+                   dataSource={goods.map((good) => ({
+                       ...good,
+                       key: good.id,
+                       actions: {
+                           id: good.id,
+                           goodAmount: good.goodAmount
+                       }
+                   }))}
                    bordered
                    pagination={{
                        defaultPageSize: 5,
@@ -230,6 +275,11 @@ const ManagerGoodPage = () => {
                        emptyText: customEmptyText
                    }}
             />
+            <OurGoodModal id={id}
+                          amount={amount}
+                          open={open}
+                          onOk={handleOk}
+                          onCancel={handleCancel} />
         </>
     );
 };
