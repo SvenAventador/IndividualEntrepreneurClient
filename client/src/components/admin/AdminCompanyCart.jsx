@@ -74,7 +74,7 @@ const AdminCompanyCart = () => {
             }).then(() => {
                 return api.success({
                     message: 'Внимание!',
-                    description: `Все Ваши поставщики успешно удалены!`,
+                    description: `Накладная успешно сформирована!`,
                     className: 'custom-class',
                     style: {
                         width: 600

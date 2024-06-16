@@ -60,7 +60,7 @@ const OurGoodModal = (props) => {
                ]}>
             <Input value={amounts}
                    onChange={(e) => {
-                       const onlyNumbers = e.target.value.replace(/[^0-9]/g, ''); // Удаляем все символы, кроме цифр
+                       const onlyNumbers = e.target.value.replace(/[^0-9]/g, ''); 
                        setAmount(onlyNumbers);
                    }}
                    maxLength={7}

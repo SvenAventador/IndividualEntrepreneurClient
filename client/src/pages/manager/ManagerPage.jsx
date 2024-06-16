@@ -50,8 +50,8 @@ const ManagerPage = () => {
     }
 
     const items = [
-        getItem('Накладные', '2', <UnorderedListOutlined/>, () => setSelectedMenuItem('invoice')),
-        getItem('Товары', '1', <AppleOutlined/>, () => setSelectedMenuItem('goods')),
+        getItem('Накладные', '1', <UnorderedListOutlined/>, () => setSelectedMenuItem('invoice')),
+        getItem('Товары', '2', <AppleOutlined/>, () => setSelectedMenuItem('goods')),
         getItem('Выйти из аккаунта', '3', <LogoutOutlined/>, handleLogout)
     ];
 
